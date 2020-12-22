@@ -10,9 +10,15 @@
         <menu>
             <item
                 android:id="@+id/help"
-                android:icon="@drawable/ic_action_help"
+                android:icon="@drawable/ic_help"
                 android:title="@string/help"
-                app:showAsAction="always|withText" />
+                app:showAsAction="withText" />
+
+            <item
+                android:id="@+id/dark_mode"
+                android:icon="@drawable/ic_dark_mode"
+                android:title="@string/enable_dark_mode"
+                app:showAsAction="withText" />
         </menu>
     </item>
 </menu>

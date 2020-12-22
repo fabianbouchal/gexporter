@@ -39,6 +39,7 @@ import com.google.gson.JsonParser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.surfsite.gexporter.base.BaseActivity;
 import org.tracks.exporter.R;
 
 import java.io.File;
@@ -57,7 +58,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final Logger Log = LoggerFactory.getLogger(MainActivity.class);
 
     @Nullable
@@ -209,6 +210,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem darkModeItem = menu.findItem(R.id.dark_mode);
+        if (isDarkModeEnabled()) {
+            darkModeItem.setTitle(R.string.disable_dark_mode);
+        } else {
+            darkModeItem.setTitle(R.string.enable_dark_mode);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -217,6 +228,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.help:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gimportexportdevs/gexporter/wiki/Help"));
                 startActivity(browserIntent);
+                break;
+
+            case R.id.dark_mode:
+                // toggle the ui mode settings
+                updateUiMode(!isDarkModeEnabled());
                 break;
         }
         return true;
