@@ -2,4 +2,5 @@
 <resources>
     <attr name="colorBackground" format="reference" />
     <attr name="colorText" format="reference" />
+    <attr name="colorDividerGrey" format="reference" />
 </resources>

@@ -9,6 +9,8 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="textColor">#2a2a2a</color>
 
+    <color name="colorDividerGrey">#c0c0c0</color>
+
     <!-- Dark Theme -->
     <color name="colorPrimary_dark">#474747</color>
     <color name="colorPrimaryDark_dark">#404040</color>
@@ -16,5 +18,8 @@
 
     <color name="colorBackground_dark">#2a2a2a</color>
     <color name="textColor_dark">#FFFFFF</color>
+
+    <color name="colorDividerGrey_dark">#474747</color>
+
 
 </resources>

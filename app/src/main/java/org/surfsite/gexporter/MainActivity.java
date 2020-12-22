@@ -15,10 +15,8 @@ import android.provider.OpenableColumns;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuBuilder;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.DigitsKeyListener;
 import android.view.Menu;
@@ -40,6 +38,7 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.surfsite.gexporter.base.BaseActivity;
+import org.surfsite.gexporter.filelist.FileListAdapter;
 import org.tracks.exporter.R;
 
 import java.io.File;
@@ -72,12 +71,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private CheckBox mUseWalkingGrade;
     private CheckBox mReducePoints;
     private EditText mMaxPoints;
+    private RecyclerView mRvFiles;
     private Gpx2FitOptions mGpx2FitOptions = null;
     File mDirectory = null;
     private NumberFormat mNumberFormat = NumberFormat.getInstance(Locale.getDefault());
     ArrayList<Uri> mUris;
     String mType;
     ContentResolver mCR;
+
+    private FileListAdapter mFileListAdapter = new FileListAdapter();
 
     private final static int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 300;
     private final static int MY_PERMISSIONS_REQUEST_INTERNET = 301;
@@ -89,6 +91,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        mRvFiles = findViewById(R.id.rv_files);
+        mRvFiles.setAdapter(mFileListAdapter);
 
         mSpeedUnit = (Spinner) findViewById(R.id.SPspeedUnits);
         ArrayAdapter<CharSequence> mSpeedUnitAdapter = ArrayAdapter.createFromResource(this,
@@ -126,7 +131,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (getCurrentFocus() != mSpeed) {
-                        return;
+                    return;
                 }
 
                 if (editable.length() > 0 && mGpx2FitOptions != null) {
@@ -137,7 +142,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         Collections.reverse(Arrays.asList(as));
                         speed = mNumberFormat.parse(as[0]).doubleValue();
                         if (as.length > 1) {
-                            speed = mNumberFormat.parse(as[1]).doubleValue() + speed/60.0;
+                            speed = mNumberFormat.parse(as[1]).doubleValue() + speed / 60.0;
                         }
                         if (as.length > 2) {
                             speed = mNumberFormat.parse(as[2]).doubleValue() * 60 + speed;
@@ -223,8 +228,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.help:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gimportexportdevs/gexporter/wiki/Help"));
                 startActivity(browserIntent);
@@ -250,7 +254,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (speed < 60) {
                     val = String.format(Locale.getDefault(), "%d:%02d", (int) speed, ((int) (speed * 60.0 + 0.5) % 60));
                 } else {
-                    val = String.format(Locale.getDefault(), "%d:%02d:%02d",((int) speed) / 60,
+                    val = String.format(Locale.getDefault(), "%d:%02d:%02d", ((int) speed) / 60,
                             ((int) speed % 60), ((int) (speed * 60.0 + 0.5) % 60));
                 }
                 break;
@@ -263,7 +267,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 if (speed < 60) {
                     val = String.format(Locale.getDefault(), "%d:%02d", (int) speed, ((int) (speed * 60.0 + 0.5) % 60));
                 } else {
-                    val = String.format(Locale.getDefault(), "%d:%02d:%02d",((int) speed) / 60,
+                    val = String.format(Locale.getDefault(), "%d:%02d:%02d", ((int) speed) / 60,
                             ((int) speed % 60), ((int) (speed * 60.0 + 0.5) % 60));
                 }
                 break;
@@ -347,8 +351,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     public void save(Gpx2FitOptions options) {
         Application app = getApplication();
-        SharedPreferences mPrefs=app.getSharedPreferences(app.getApplicationInfo().name, Context.MODE_PRIVATE);
-        SharedPreferences.Editor ed=mPrefs.edit();
+        SharedPreferences mPrefs = app.getSharedPreferences(app.getApplicationInfo().name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = mPrefs.edit();
         Gson gson = new Gson();
         ed.putString(options.getClass().getName(), gson.toJson(options));
         ed.apply();
@@ -357,8 +361,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public Gpx2FitOptions load() {
         Application app = getApplication();
         Gson gson = new GsonBuilder().serializeSpecialFloatingPointValues().create();
-        JsonParser parser=new JsonParser();
-        SharedPreferences mPrefs=app.getSharedPreferences(app.getApplicationInfo().name, Context.MODE_PRIVATE);
+        JsonParser parser = new JsonParser();
+        SharedPreferences mPrefs = app.getSharedPreferences(app.getApplicationInfo().name, Context.MODE_PRIVATE);
         String json = mPrefs.getString(Gpx2FitOptions.class.getName(), null);
         Gpx2FitOptions opts = null;
         if (json != null && json.length() > 0)
@@ -445,7 +449,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED
-                    ) {
+            ) {
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -460,12 +464,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void copyInputStreamToFile( InputStream in, File file ) {
+    private void copyInputStreamToFile(InputStream in, File file) {
         try {
             OutputStream out = new FileOutputStream(file);
             byte[] buf = new byte[1024];
             int len;
-            len=in.read(buf);
+            len = in.read(buf);
             String name = file.getAbsolutePath();
             if (!(name.endsWith(".fit") || name.endsWith(".FIT") || name.endsWith(".gpx") || name.endsWith(".GPX"))) {
                 String sig = new String(Arrays.copyOf(buf, 8), "UTF-8");
@@ -477,9 +481,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     file.renameTo(new File(name + ".fit"));
                 }
             }
-            while(len>0){
-                out.write(buf,0,len);
-                len=in.read(buf);
+            while (len > 0) {
+                out.write(buf, 0, len);
+                len = in.read(buf);
             }
             out.close();
             in.close();
@@ -565,16 +569,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         };
 
-        String[] filelist = new File(rootdir).list(filenameFilter);
+        File root = new File(rootdir);
+        File[] fileList = root.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".fit") || name.endsWith(".FIT") || name.endsWith(".gpx") || name.endsWith(".GPX");
+            }
+        });
 
-        if (filelist == null) {
+        if (fileList == null) {
             mTextView.setText(R.string.no_permission);
         } else {
-            if (filelist.length == 0) {
+            if (fileList.length == 0) {
                 mTextView.setText(R.string.no_files_to_serve);
             } else {
-                Arrays.sort(filelist);
-                mTextView.setText(String.format(getResources().getString(R.string.serving_from), rootdir, TextUtils.join("\n", filelist)));
+                Arrays.sort(fileList);
+                mTextView.setText(String.format(getResources().getString(R.string.serving_from), rootdir));
+                mFileListAdapter.setFiles(fileList);
             }
         }
     }

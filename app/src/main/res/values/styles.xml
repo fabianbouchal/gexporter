@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="colorDividerGrey">@color/colorDividerGrey</item>
+
         <item name="colorBackground">@color/colorBackground</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:itemBackground">@color/colorBackground</item>
@@ -22,6 +24,8 @@
         <item name="colorPrimary">@color/colorPrimary_dark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_dark</item>
         <item name="colorAccent">@color/colorAccent_dark</item>
+
+        <item name="colorDividerGrey">@color/colorDividerGrey_dark</item>
 
         <item name="colorBackground">@color/colorBackground_dark</item>
         <item name="android:colorBackground">@color/colorBackground_dark</item>
