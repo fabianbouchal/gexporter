@@ -4,7 +4,7 @@
     <!-- Light Theme -->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#245C8D</color>
 
     <color name="colorBackground">#FFFFFF</color>
     <color name="textColor">#2a2a2a</color>
@@ -17,7 +17,7 @@
     <color name="colorAccent_dark">#DAA520</color>
 
     <color name="colorBackground_dark">#2a2a2a</color>
-    <color name="textColor_dark">#FFFFFF</color>
+    <color name="textColor_dark">#eae9e9</color>
 
     <color name="colorDividerGrey_dark">#474747</color>
 
