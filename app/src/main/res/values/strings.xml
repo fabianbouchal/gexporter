@@ -19,6 +19,8 @@
     <string name="speed_settings">Speed settings</string>
     <string name="course_points_settings">Points settings</string>
     <string name="additional_settings">Additional settings</string>
+    <string name="file_size_kb">%1$s KB</string>
+    <string name="file_size_mb">%1$s MB</string>
 
     <string-array name="speedunits">
         <item name="minkm">min/km</item>

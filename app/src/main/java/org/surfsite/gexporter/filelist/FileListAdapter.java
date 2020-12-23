@@ -53,8 +53,14 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
             tvName.setText(file.getName());
             if (file.exists()) {
 
-                float fileSize = Math.round((float) file.length() / 1024f * 100f) / 100f;
-                tvSize.setText(fileSize + " KB");
+                float fileSize = Math.round((float) file.length() / 1024f * 100f) / 100f; // in kb
+                if (fileSize > 1024) {
+                    // 1 MB or more -> display mb instead of kb
+                    fileSize = Math.round(fileSize / 1024 * 100f) / 100f;
+                    tvSize.setText(tvSize.getContext().getString(R.string.file_size_mb, "" + fileSize));
+                } else {
+                    tvSize.setText(tvSize.getContext().getString(R.string.file_size_kb, "" + fileSize));
+                }
             } else {
                 tvSize.setText("");
             }
