@@ -23,7 +23,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
 
     @Override
     public void onBindViewHolder(@NonNull FileViewHolder fileViewHolder, int i) {
-        fileViewHolder.setData(files[i]);
+        fileViewHolder.setData(files[i], i == files.length - 1);
     }
 
     @Override
@@ -40,14 +40,16 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
 
         private TextView tvName;
         private TextView tvSize;
+        private View fileItemDivider;
 
         public FileViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.file_name);
             tvSize = itemView.findViewById(R.id.file_size);
+            fileItemDivider = itemView.findViewById(R.id.fileItemDivider);
         }
 
-        public void setData(File file) {
+        public void setData(File file, boolean isLasIndex) {
             tvName.setText(file.getName());
             if (file.exists()) {
 
@@ -55,6 +57,12 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.FileVi
                 tvSize.setText(fileSize + " KB");
             } else {
                 tvSize.setText("");
+            }
+
+            if (isLasIndex) {
+                fileItemDivider.setVisibility(View.GONE);
+            } else {
+                fileItemDivider.setVisibility(View.VISIBLE);
             }
         }
     }

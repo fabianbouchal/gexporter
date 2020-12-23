@@ -21,158 +21,258 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="81dp">
 
-        <CheckBox
-            android:id="@+id/CBforceSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/force_speed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editSpeed" />
-
-        <EditText
-            android:id="@+id/editSpeed"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clDefaultSpeed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="8dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toRightOf="@+id/textView2"
-            app:layout_constraintRight_toLeftOf="@+id/SPspeedUnits"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="@string/speed"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editSpeed"
-            app:layout_constraintLeft_toLeftOf="parent" />
-
-        <Spinner
-            android:id="@+id/SPspeedUnits"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:entries="@array/speedunits"
-            android:spinnerMode="dropdown"
-            app:backgroundTint="?attr/colorAccent"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editSpeed"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <CheckBox
-            android:id="@+id/CBuse3D"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/use_3d_distance"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CBforceSpeed" />
-
-        <CheckBox
-            android:id="@+id/CBinject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/inject_course_points"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CBuse3D" />
-
-        <CheckBox
-            android:id="@+id/CBuseWalkingGrade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/use_walking_grade_factor"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/CBinject" />
-
-        <CheckBox
-            android:id="@+id/CBreducePoints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="@string/reduce_points_to"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editPointNumber"
-            app:layout_constraintLeft_toLeftOf="parent" />
-
-        <EditText
-            android:id="@+id/editPointNumber"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:ems="4"
-            android:inputType="number"
-            android:maxEms="5"
-            android:maxLength="5"
-            android:minEms="1"
-            app:layout_constraintLeft_toRightOf="@+id/CBreducePoints"
-            app:layout_constraintRight_toLeftOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/CBuseWalkingGrade" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:text="@string/points"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editPointNumber"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <View
-            android:id="@+id/divider_settings"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="10dp"
-            android:background="?attr/colorText"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_settings_cell_background"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/editSpeed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toRightOf="@+id/textView2"
+                app:layout_constraintRight_toLeftOf="@+id/SPspeedUnits"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speed"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editSpeed"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <Spinner
+                android:id="@+id/SPspeedUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/speedunits"
+                android:spinnerMode="dropdown"
+                app:backgroundTint="?attr/colorAccent"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editSpeed"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <CheckBox
+                android:id="@+id/CBforceSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/force_speed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:background="?attr/colorBackground"
+            android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/speed_settings"
+            android:textColor="?attr/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/clDefaultSpeed"
+            app:layout_constraintStart_toStartOf="@id/clDefaultSpeed"
+            app:layout_constraintTop_toTopOf="@id/clDefaultSpeed" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clPointsSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_settings_cell_background"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clDefaultSpeed">
+
+            <CheckBox
+                android:id="@+id/CBinject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/inject_course_points"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/CBreducePoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/reduce_points_to"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editPointNumber"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <EditText
+                android:id="@+id/editPointNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:ems="4"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxEms="5"
+                android:maxLength="5"
+                android:minEms="1"
+                app:layout_constraintLeft_toRightOf="@+id/CBreducePoints"
+                app:layout_constraintRight_toLeftOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/CBinject" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="@string/points"
+                app:layout_constraintBaseline_toBaselineOf="@+id/editPointNumber"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:background="?attr/colorBackground"
+            android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/course_points_settings"
+            android:textColor="?attr/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/clPointsSettings"
+            app:layout_constraintStart_toStartOf="@id/clPointsSettings"
+            app:layout_constraintTop_toTopOf="@id/clPointsSettings" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clAdditionalSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_settings_cell_background"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clPointsSettings">
+
+            <CheckBox
+                android:id="@+id/CBuse3D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/use_3d_distance"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <CheckBox
+                android:id="@+id/CBuseWalkingGrade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/use_walking_grade_factor"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/CBuse3D" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:background="?attr/colorBackground"
+            android:paddingStart="4dp"
+            android:paddingLeft="4dp"
+            android:paddingEnd="4dp"
+            android:paddingRight="4dp"
+            android:text="@string/additional_settings"
+            android:textColor="?attr/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/clAdditionalSettings"
+            app:layout_constraintStart_toStartOf="@id/clAdditionalSettings"
+            app:layout_constraintTop_toTopOf="@id/clAdditionalSettings" />
 
         <TextView
             android:id="@+id/textv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="16dp"
             android:text="@string/starting"
+            android:textColor="?attr/colorAccent"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider_settings" />
+            app:layout_constraintTop_toBottomOf="@+id/clAdditionalSettings" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_files"
+        <FrameLayout
+            android:id="@+id/container_rv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
-            android:paddingTop="10dp"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            android:background="@drawable/shape_settings_cell_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textv"
-            tools:listitem="@layout/item_file_list" />
+            app:layout_constraintTop_toBottomOf="@id/textv">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_files"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_file_list" />
+        </FrameLayout>
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
